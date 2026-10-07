@@ -130,8 +130,65 @@ article h2 {
   font-size: 1.4rem;
 }
 
+@font-face {
+  font-family: "(off)ont";
+  src: url("images/(off)ont.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .hero-image { 
   display: none;
+}
+
+.project-extra-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.project-font-preview {
+  width: 100%;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f3f3;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1.2rem 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.project-font-preview span {
+  font-family: "(off)ont", sans-serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  word-break: break-word;
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.76rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.download-button:hover {
+  transform: translateY(-1px);
+  background: #333;
 }
 
 .project-gallery { 

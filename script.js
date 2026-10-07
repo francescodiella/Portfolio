@@ -1,5 +1,31 @@
 const projects = [
   {
+    id: 'progetto-15',
+    title: '(off)ont',
+    year: '2026',
+    type: 'Type Design',
+    hero: 'images/font_1.webp',
+    homePreview: 'images/font_1.webp',
+    description: `off)ont è una critica a me stesso, al mio fare e al mio essere.
+
+Dove Francesco Pio Diella fa finta, (off)ont rappresenta la realtà.
+
+Il carattere nasce come riflessione sul fenomeno dello zombie-scrolling: lo scorrimento passivo e inconsapevole di contenuti, che trasforma il tempo in una successione di gesti automatici.
+
+Non è un font progettato.
+Non segue le basi della tipografia.
+
+Una forma generata dalla perdita di tempo, dalla distrazione e dalla perdita di creatività.
+
+(off)ont non cerca quindi di essere un buon progetto, carattere tipografico.`,
+    gallery: [
+      'images/font_2.webp',
+      'images/font_3.webp'
+    ],
+    videos: [],
+    fontFile: 'images/(off)ont.otf'
+  },
+  {
     id: 'progetto-0',
     title: 'La perdita di un momento di una tipologia indefinita',
     year: '2026',
@@ -403,6 +429,22 @@ function renderProject() {
   metaEl.textContent = `${project.type} • ${project.year}`;
   descEl.innerHTML = project.description.replace(/\n/g, '<br>');
 
+  const existingExtraContent = document.querySelector('.project-extra-content');
+  if (existingExtraContent) {
+    existingExtraContent.remove();
+  }
+
+  if (project.fontFile) {
+    const extraContent = document.createElement('div');
+    extraContent.className = 'project-extra-content';
+
+    extraContent.innerHTML = `
+      <a class="download-button" href="${project.fontFile}" download aria-label="Scarica il font ${project.title}">Download</a>
+    `;
+
+    descEl.insertAdjacentElement('afterend', extraContent);
+  }
+
   // Caso speciale: progetto con PDF viewer
   if (project.pdfViewer) {
     galleryEl.innerHTML = `
@@ -579,36 +621,6 @@ function initLightbox(media) {
       if (e.key === 'Escape') closeLightbox();
     }
   });
-
-  // Supporto swipe per dispositivi touch
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  lightbox.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
-  lightbox.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  });
-
-  function handleSwipe() {
-    const swipeThreshold = 50; // Minimum distance for swipe
-    const swipeDistance = touchStartX - touchEndX;
-
-    if (Math.abs(swipeDistance) > swipeThreshold) {
-      if (swipeDistance > 0) {
-        // Swipe left - next image
-        currentLightboxIndex = (currentLightboxIndex + 1) % media.length;
-        showLightbox();
-      } else {
-        // Swipe right - previous image
-        currentLightboxIndex = (currentLightboxIndex - 1 + media.length) % media.length;
-        showLightbox();
-      }
-    }
-  }
 
   function showLightbox() {
     const currentMedia = media[currentLightboxIndex];
